@@ -61,7 +61,7 @@ function Home() {
       description: "Beautiful royal gardens and sea view",
       image: MONTAZA,
       location: "Alexandria",
-      price: "Free"
+      price: "70 EGP"
     },
 
     {
