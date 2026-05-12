@@ -122,27 +122,31 @@ function Home() {
 
     <div className="container mt-5">
 
-      <h1
+      <div className="hero-section">
 
-        className="title text-center"
+        <h1
 
-        style={{
-          color: darkMode
-            ? "white"
-            : "#0f172a"
-        }}
+          className="title text-center"
 
-      >
+          style={{
+            color: darkMode
+              ? "white"
+              : "white"
+          }}
 
-        Explore Egypt 🌍
+        >
 
-      </h1>
+          Explore Egypt 🌍
 
-      <p className="hero-text">
+        </h1>
 
-        Discover the best places in Egypt 
+        <p className="hero-text">
 
-      </p>
+          Discover the beauty of Egypt 🇪🇬
+
+        </p>
+
+      </div>
 
       <input
         type="text"

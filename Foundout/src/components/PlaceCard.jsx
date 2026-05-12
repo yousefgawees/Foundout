@@ -3,13 +3,26 @@ import { useContext } from "react"
 import { FavoritesContext }
 from "../context/FavoritesContext"
 
+import { ThemeContext }
+from "../context/ThemeContext"
+
 import { Link }
 from "react-router-dom"
 
 function PlaceCard(props) {
 
-  const { addToFavorites } =
-    useContext(FavoritesContext)
+  const {
+    favorites,
+    addToFavorites
+  } = useContext(FavoritesContext)
+
+  const { darkMode } =
+    useContext(ThemeContext)
+
+  const isFavorite =
+    favorites.some(
+      (item) => item.id === props.id
+    )
 
   return (
 
@@ -26,7 +39,17 @@ function PlaceCard(props) {
           height="250"
         />
 
-        <div className="card-body d-flex flex-column">
+        <div
+
+          className="card-body d-flex flex-column"
+
+          style={{
+            color: darkMode
+              ? "white"
+              : "black"
+          }}
+
+        >
 
           <h5>{props.name}</h5>
 
@@ -44,15 +67,35 @@ function PlaceCard(props) {
 
             <button
 
-              className="btn btn-dark w-50"
+              className={`btn w-50 ${
+                isFavorite
+                  ? "btn-success"
+                  : "btn-dark"
+              }`}
 
-              onClick={() =>
-                addToFavorites(props)
-              }
+              onClick={() => {
+
+                if (isFavorite) {
+
+                  alert("Already Added ✅")
+
+                }
+
+                else {
+
+                  addToFavorites(props)
+
+                }
+
+              }}
 
             >
 
-              Favorite ❤️
+              {
+                isFavorite
+                  ? "Added ✅"
+                  : "Favorite ❤️"
+              }
 
             </button>
 
