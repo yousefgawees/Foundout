@@ -1,19 +1,44 @@
-import { BrowserRouter, Routes, Route }
+import {
+  BrowserRouter,
+  Routes,
+  Route
+}
+
 from "react-router-dom"
 
-import { useContext } from "react"
+import {
+  useContext
+}
 
-import { ThemeContext }
-from "./context/ThemeContext"
+from "react"
 
 import Home from "./pages/Home"
 import About from "./pages/About"
 import Favorites from "./pages/Favorites"
 import Details from "./pages/Details"
+import Landing from "./pages/Landing"
 
 import Navbar from "./components/Navbar"
+import Footer from "./components/Footer"
 
-function App() {
+import FavoritesProvider
+from "./context/FavoritesContext"
+
+import ThemeProvider, {
+  ThemeContext
+}
+
+from "./context/ThemeContext"
+
+import {
+  ToastContainer
+}
+
+from "react-toastify"
+
+import "react-toastify/dist/ReactToastify.css"
+
+function MainApp() {
 
   const { darkMode } =
     useContext(ThemeContext)
@@ -22,45 +47,83 @@ function App() {
 
     <div
 
-      className={
-        darkMode
-          ? "bg-dark text-light min-vh-100"
-          : "bg-light text-dark min-vh-100"
-      }
+      style={{
+
+        backgroundColor:
+          darkMode
+            ? "#020617"
+            : "#f8fafc",
+
+        minHeight: "100vh",
+
+        color:
+          darkMode
+            ? "white"
+            : "black",
+
+        transition: "0.3s"
+
+      }}
 
     >
 
-      <BrowserRouter>
+      <Navbar />
 
-        <Navbar />
+      <Routes>
 
-        <Routes>
+        <Route
+          path="/"
+          element={<Landing />}
+        />
 
-          <Route
-            path="/"
-            element={<Home />}
-          />
+        <Route
+          path="/explore"
+          element={<Home />}
+        />
 
-          <Route
-            path="/about"
-            element={<About />}
-          />
+        <Route
+          path="/about"
+          element={<About />}
+        />
 
-          <Route
-            path="/favorites"
-            element={<Favorites />}
-          />
+        <Route
+          path="/favorites"
+          element={<Favorites />}
+        />
 
-          <Route
-            path="/details/:id"
-            element={<Details />}
-          />
+        <Route
+          path="/details/:id"
+          element={<Details />}
+        />
 
-        </Routes>
+      </Routes>
 
-      </BrowserRouter>
+      <Footer />
+
+      <ToastContainer />
 
     </div>
+
+  )
+}
+
+function App() {
+
+  return (
+
+    <ThemeProvider>
+
+      <FavoritesProvider>
+
+        <BrowserRouter>
+
+          <MainApp />
+
+        </BrowserRouter>
+
+      </FavoritesProvider>
+
+    </ThemeProvider>
 
   )
 }

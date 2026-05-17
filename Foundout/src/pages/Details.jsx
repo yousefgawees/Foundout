@@ -1,4 +1,11 @@
-import { useParams } from "react-router-dom"
+import { useParams }
+from "react-router-dom"
+
+import { useContext }
+from "react"
+
+import { ThemeContext }
+from "../context/ThemeContext"
 
 import GIZA from "../assets/GIZA.jpg"
 import LUXOR from "../assets/LUXOR.jpg"
@@ -11,6 +18,9 @@ import TOWER from "../assets/TOWER.jpg"
 
 function Details() {
 
+  const { darkMode } =
+    useContext(ThemeContext)
+
   const { id } = useParams()
 
   const places = [
@@ -21,7 +31,10 @@ function Details() {
       description: "Amazing city view in Cairo",
       image: TOWER,
       location: "Cairo",
-      price: "150 EGP"
+      price: "150 EGP",
+      rating: "4.8",
+      map:
+        "https://maps.google.com/?q=Cairo+Tower"
     },
 
     {
@@ -30,7 +43,10 @@ function Details() {
       description: "One of the seven wonders of the world",
       image: GIZA,
       location: "Giza",
-      price: "240 EGP"
+      price: "240 EGP",
+      rating: "5.0",
+      map:
+        "https://maps.google.com/?q=Pyramids+of+Giza"
     },
 
     {
@@ -39,7 +55,10 @@ function Details() {
       description: "Historic Islamic castle in Cairo",
       image: QAL3A,
       location: "Cairo",
-      price: "180 EGP"
+      price: "180 EGP",
+      rating: "4.7",
+      map:
+        "https://maps.google.com/?q=Cairo+Citadel"
     },
 
     {
@@ -48,7 +67,10 @@ function Details() {
       description: "Beautiful royal gardens and sea view",
       image: MONTAZA,
       location: "Alexandria",
-      price: "Free"
+      price: "Free",
+      rating: "4.6",
+      map:
+        "https://maps.google.com/?q=Montaza+Palace"
     },
 
     {
@@ -57,7 +79,10 @@ function Details() {
       description: "Famous fortress on the Mediterranean sea",
       image: QAITBAY,
       location: "Alexandria",
-      price: "100 EGP"
+      price: "100 EGP",
+      rating: "4.9",
+      map:
+        "https://maps.google.com/?q=Qaitbay+Citadel"
     },
 
     {
@@ -66,7 +91,10 @@ function Details() {
       description: "Relax and enjoy nature in Siwa",
       image: SIWA,
       location: "Siwa",
-      price: "300 EGP"
+      price: "300 EGP",
+      rating: "4.8",
+      map:
+        "https://maps.google.com/?q=Siwa+Oasis"
     },
 
     {
@@ -75,7 +103,10 @@ function Details() {
       description: "Ancient Egyptian temple in Luxor",
       image: LUXOR,
       location: "Luxor",
-      price: "260 EGP"
+      price: "260 EGP",
+      rating: "5.0",
+      map:
+        "https://maps.google.com/?q=Luxor+Temple"
     },
 
     {
@@ -84,7 +115,10 @@ function Details() {
       description: "Beautiful Nile view and relaxing atmosphere",
       image: NILE,
       location: "Aswan",
-      price: "Free"
+      price: "Free",
+      rating: "4.7",
+      map:
+        "https://maps.google.com/?q=Aswan+Nile"
     }
 
   ]
@@ -97,7 +131,17 @@ function Details() {
 
     <div className="container mt-5">
 
-      <div className="card p-4 shadow details-card">
+      <div
+
+        className="card p-4 shadow details-card"
+
+        style={{
+          backgroundColor: "white",
+          color: "black",
+          borderRadius: "20px"
+        }}
+
+      >
 
         <img
           src={place.image}
@@ -123,11 +167,31 @@ function Details() {
 
         </h4>
 
+        <h5 className="text-warning mt-3">
+
+          ⭐ {place.rating}
+
+        </h5>
+
         <h5 className="mt-3">
 
           💰 {place.price}
 
         </h5>
+
+        <a
+
+          href={place.map}
+
+          target="_blank"
+
+          className="btn btn-success mt-4"
+
+        >
+
+          Open in Maps 🗺️
+
+        </a>
 
       </div>
 

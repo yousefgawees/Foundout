@@ -1,8 +1,10 @@
-import { useState, useContext } from "react"
+import { useState, useContext }
+from "react"
 
 import "../styles/home.css"
 
-import PlaceCard from "../components/PlaceCard"
+import PlaceCard
+from "../components/PlaceCard"
 
 import { ThemeContext }
 from "../context/ThemeContext"
@@ -21,7 +23,8 @@ function Home() {
   const { darkMode } =
     useContext(ThemeContext)
 
-  const [search, setSearch] = useState("")
+  const [search, setSearch] =
+    useState("")
 
   const [selectedCity, setSelectedCity] =
     useState("All")
@@ -34,6 +37,8 @@ function Home() {
       description: "Amazing city view in Cairo",
       image: TOWER,
       location: "Cairo",
+      category: "Historical",
+      rating: "4.8",
       price: "150 EGP"
     },
 
@@ -43,6 +48,8 @@ function Home() {
       description: "One of the seven wonders of the world",
       image: GIZA,
       location: "Giza",
+      category: "Historical",
+      rating: "5.0",
       price: "240 EGP"
     },
 
@@ -52,6 +59,8 @@ function Home() {
       description: "Historic Islamic castle in Cairo",
       image: QAL3A,
       location: "Cairo",
+      category: "Historical",
+      rating: "4.7",
       price: "180 EGP"
     },
 
@@ -61,7 +70,9 @@ function Home() {
       description: "Beautiful royal gardens and sea view",
       image: MONTAZA,
       location: "Alexandria",
-      price: "70 EGP"
+      category: "Nature",
+      rating: "4.6",
+      price: "Free"
     },
 
     {
@@ -70,6 +81,8 @@ function Home() {
       description: "Famous fortress on the Mediterranean sea",
       image: QAITBAY,
       location: "Alexandria",
+      category: "Beach",
+      rating: "4.9",
       price: "100 EGP"
     },
 
@@ -79,6 +92,8 @@ function Home() {
       description: "Relax and enjoy nature in Siwa",
       image: SIWA,
       location: "Siwa",
+      category: "Nature",
+      rating: "4.8",
       price: "300 EGP"
     },
 
@@ -88,6 +103,8 @@ function Home() {
       description: "Ancient Egyptian temple in Luxor",
       image: LUXOR,
       location: "Luxor",
+      category: "Historical",
+      rating: "5.0",
       price: "260 EGP"
     },
 
@@ -97,24 +114,36 @@ function Home() {
       description: "Beautiful Nile view and relaxing atmosphere",
       image: NILE,
       location: "Aswan",
+      category: "Nature",
+      rating: "4.7",
       price: "Free"
     }
 
   ]
 
-  const filteredPlaces = places.filter((place) =>
+  const filteredPlaces = places.filter(
 
-    place.name
-      .toLowerCase()
-      .includes(search.toLowerCase())
+    (place) =>
 
-    &&
+      (
+        place.name
+          .toLowerCase()
+          .includes(search.toLowerCase())
 
-    (
-      selectedCity === "All"
-      ||
-      place.location === selectedCity
-    )
+        ||
+
+        place.description
+          .toLowerCase()
+          .includes(search.toLowerCase())
+      )
+
+      &&
+
+      (
+        selectedCity === "All"
+        ||
+        place.location === selectedCity
+      )
 
   )
 
@@ -122,33 +151,8 @@ function Home() {
 
     <div className="container mt-5">
 
-      <div className="hero-section">
-
-        <h1
-
-          className="title text-center"
-
-          style={{
-            color: darkMode
-              ? "white"
-              : "white"
-          }}
-
-        >
-
-          Explore Egypt 🌍
-
-        </h1>
-
-        <p className="hero-text">
-
-          Discover the beauty of Egypt 🇪🇬
-
-        </p>
-
-      </div>
-
       <input
+
         type="text"
 
         placeholder="Search places..."
@@ -158,6 +162,7 @@ function Home() {
         onChange={(event) =>
           setSearch(event.target.value)
         }
+
       />
 
       <select
@@ -203,6 +208,11 @@ function Home() {
       <div className="row">
 
         {
+
+          filteredPlaces.length > 0
+
+          ?
+
           filteredPlaces.map((place) => (
 
             <PlaceCard
@@ -219,11 +229,24 @@ function Home() {
 
               location={place.location}
 
+              category={place.category}
+
+              rating={place.rating}
+
               price={place.price}
 
             />
 
           ))
+
+          :
+
+          <h2 className="text-center">
+
+            No places found 😢
+
+          </h2>
+
         }
 
       </div>
